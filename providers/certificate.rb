@@ -17,6 +17,7 @@ action :create do
     mode 0644
     variables(domain: new_resource.domain, webroot_dir: webroot_dir)
     notifies :restart, "service[nginx]", :immediately
+    cookbook "certbot"
   end
 
   service "nginx" do
