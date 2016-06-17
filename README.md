@@ -32,11 +32,19 @@ This cookbook configure and install ssl certificates throught letsencrypt for a 
         <th>Attribute</th>
         <th>Description</th>
         <th>Default value</th>
+        <th>Required</th>
     </tr>
     <tr>
         <td>domain</td>
         <td>The domain to certificate</td>
         <td>nil</td>
+        <td>true</td>
+    </tr>
+    <tr>
+        <td>email</td>
+        <td>The email address to associate with the certificate</td>
+        <td>nil</td>
+        <td>true</td>
     </tr>
     <tr>
         <td>renew_policy</td>
@@ -45,22 +53,26 @@ This cookbook configure and install ssl certificates throught letsencrypt for a 
             Permitted values:<br />
             <b>:renew_by_default</b>: request a new certificate and install it;<br />
             <b>:keep_until_expiring</b>: request and install a new certificate if the current is less then 30 days from expiring.
-            </td>
+        </td>
         <td>:renew_until_expiring</td>
+        <td>false</td>
     </tr>
     <tr>
         <td>install_cron</td>
         <td>If true, install a cronjob that automatically try to renew the certificate</td>
         <td>true</td>
+        <td>false</td>
     </tr>
     <tr>
         <td>frequency</td>
         <td>Set the frequency the cron must run.<br />Permitted values: <b>:daily, :weekly, :monthly.</b></td>
         <td>:daily</td>
+        <td>false</td>
     </tr>
     <tr>
         <td>test</td>
         <td>If true, request the certificate through Acme Staging server</td>
+        <td>false</td>
         <td>false</td>
     </tr>
 </table>
@@ -76,8 +88,8 @@ This cookbook configure and install ssl certificates throught letsencrypt for a 
     letsencrypt_fullchain_path(domain)
 
     letsencrypt_privatekey_path(domain)
-    
-    
+
+
 Throught this methods it's possible to retrieve the Let's Encrypt generated files path.
 ## Usage
 In your recipe you simply need to call the provider!

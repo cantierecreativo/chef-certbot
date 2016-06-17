@@ -24,11 +24,43 @@ action :create do
     action :nothing
   end
 
-  base_command = "letsencrypt certonly --keep-until-expiring --non-interactive --domain #{new_resource.domain} --webroot -w #{webroot_dir}"
+  cert_command = "#{base_command} #{domain_arg} #{webroot_arg} #{renew_arg} #{test_arg}"
 
   execute "letsencrypt-certonly" do
-    command "#{base_command} --email info@cantierecreativo.net --agree-tos"
+    command "#{cert_command} --email #{new_resource.email} --agree-tos"
   end
+
+  if new_resource.install_cron
+    cron "renew_#{new_resource.domain}" do
+      time new_resource.frequency
+      user 'root'
+      command "#{cert_command} && servige nginx restart"
+      action :create
+    end
+  end
+end
+
+def test_arg
+  "--test-cert" if new_resource.test
+end
+
+def renew_arg
+  case new_resource.renew_policy
+  when :renew_by_default then "--renew-by-default"
+  when :keep_until_expiring then "--keep-until-expiring"
+  end
+end
+
+def webroot_arg
+  "--webroot -w #{webroot_dir}"
+end
+
+def domain_arg
+  "--domain #{new_resource.domain}"
+end
+
+def base_command
+  "/usr/bin/letsencrypt certonly --non-interactive"
 end
 
 def webroot_dir

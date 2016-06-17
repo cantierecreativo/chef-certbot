@@ -2,8 +2,14 @@
 
 This file is used to list changes made in each version of the certbot cookbook.
 
+## 0.2.1
+- [David Librera] - Email attribute
+
+## 0.2.0
+- [David Librera] - Certificate installation and cron
+
 ## 0.1.0
-- [your_name] - Initial release of certbot
+- [David Librera] - Initial release of certbot
 
 - - -
 Check the [Markdown Syntax Guide](http://daringfireball.net/projects/markdown/syntax) for help with Markdown.
