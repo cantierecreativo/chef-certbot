@@ -6,3 +6,7 @@
 #
 # All rights reserved - Do Not Redistribute
 #
+
+package "letsencrypt" do
+  action :install
+end
