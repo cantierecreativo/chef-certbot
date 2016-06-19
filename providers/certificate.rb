@@ -7,6 +7,7 @@ action :create do
   end
 
   nginx_conf_path = "/etc/nginx/sites-enabled/letsencrypt-well-known.conf"
+
   template nginx_conf_path do
     source "nginx_letsencrypt.erb"
     owner "root"
@@ -15,7 +16,8 @@ action :create do
     variables(webroot_dir: webroot_dir)
     notifies :restart, "service[nginx]", :immediately
     cookbook "certbot"
-    not_if ::File.exists?(nginx_conf_path)
+
+    action :create_if_missing
   end
 
   service "nginx" do
