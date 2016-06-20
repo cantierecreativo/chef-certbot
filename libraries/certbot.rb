@@ -1,19 +1,27 @@
-def letsencrypt_certificates_dir(domain)
-  ::File.join("", "etc", "letsencrypt", "live", domain)
+def certbot_certificates_dir(domain)
+  ::File.join("", "etc", "certbot", "live", domain)
 end
 
-def letsencrypt_cert_path(domain)
-  ::File.join(letsencrypt_certificates_dir(domain), "cert.pem")
+def certbot_cert_path_for(domain)
+  ::File.join(certbot_certificates_dir(domain), "cert.pem")
 end
 
-def letsencrypt_chain_path(domain)
-  ::File.join(letsencrypt_certificates_dir(domain), "chain.pem")
+def certbot_chain_path_for(domain)
+  ::File.join(certbot_certificates_dir(domain), "chain.pem")
 end
 
-def letsencrypt_fullchain_path(domain)
-  ::File.join(letsencrypt_certificates_dir(domain), "fullchain.pem")
+def certbot_fullchain_path_for(domain)
+  ::File.join(certbot_certificates_dir(domain), "fullchain.pem")
 end
 
-def letsencrypt_privatekey_path(domain)
-  ::File.join(letsencrypt_certificates_dir(domain), "privkey.pem")
+def certbot_privatekey_path_for(domain)
+  ::File.join(certbot_certificates_dir(domain), "privkey.pem")
+end
+
+def certbot_webroot_path_for(domain)
+  ::File.join(node[:certbot][:webroot_dir], domain)
+end
+
+def certbot_well_known_path_for(domain)
+  ::File.join(certbot_webroot_path_for(domain), ".well-known")
 end

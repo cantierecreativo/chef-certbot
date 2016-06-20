@@ -2,22 +2,20 @@ action :create do
   directory well_known_dir do
     owner "root"
     group "root"
-    mode 755
+    mode 0755
     recursive true
   end
 
-  nginx_conf_path = "/etc/nginx/sites-enabled/letsencrypt-well-known.conf"
+  nginx_conf_path = "/etc/nginx/sites-enabled/letsencrypt-#{new_resource.domain}-well-known.conf"
 
   template nginx_conf_path do
     source "nginx_letsencrypt.erb"
     owner "root"
     group "root"
     mode 0644
-    variables(webroot_dir: webroot_dir)
+    variables(webroot_dir: webroot_dir, domain: new_resource.domain)
     notifies :restart, "service[nginx]", :immediately
     cookbook "certbot"
-
-    action :create_if_missing
   end
 
   service "nginx" do
@@ -64,7 +62,7 @@ def base_command
 end
 
 def webroot_dir
-  "/var/www/letsencrypt"
+  certbot_webroot_path_for new_resource.domain
 end
 
 def well_known_dir

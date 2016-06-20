@@ -1,5 +1,5 @@
 server {
     location ^~ /.well-known {
-        alias <%= @webroot_dir%>/.well-known/;
+        alias <%= certbot_well_known_path_for @domain %>;
     }
 }
