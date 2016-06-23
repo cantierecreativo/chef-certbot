@@ -1,7 +1,7 @@
 require 'openssl'
 
 def certbot_certificates_dir(domain)
-  ::File.join("", "etc", "certbot", "live", domain)
+  ::File.join("", "etc", "letsencrypt", "live", domain)
 end
 
 def certbot_cert_path_for(domain)

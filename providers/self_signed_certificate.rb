@@ -8,29 +8,31 @@ action :create do
     action :create
   end
 
-  key, cert = certbot_self_signed_pair
+  if new_resource.force_install || !::File.exists?( self_signed_key_path )
+    key, cert = certbot_self_signed_pair
 
-  file self_signed_key_path do
-    owner "root"
-    group "root"
-    mode 0644
-    content key
+    file self_signed_key_path do
+      owner "root"
+      group "root"
+      mode 0644
+      content key
 
-    action :create
-  end
+      action :create
+    end
 
-  file self_signed_cert_path do
-    owner "root"
-    group "root"
-    mode 0644
-    content cert
+    file self_signed_cert_path do
+      owner "root"
+      group "root"
+      mode 0644
+      content cert
 
-    action :create
-  end
+      action :create
+    end
 
-  certbot_activate_certificate new_resource.domain do
-    cert_path self_signed_cert_path
-    key_path self_signed_key_path
+    certbot_activate_certificate new_resource.domain do
+      cert_path self_signed_cert_path
+      key_path self_signed_key_path
+    end
   end
 end
 

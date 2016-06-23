@@ -6,22 +6,6 @@ action :create do
     recursive true
   end
 
-  nginx_conf_path = "/etc/nginx/sites-enabled/letsencrypt-#{new_resource.domain}-well-known.conf"
-
-  template nginx_conf_path do
-    source "nginx_letsencrypt.erb"
-    owner "root"
-    group "root"
-    mode 0644
-    variables(webroot_dir: webroot_dir, domain: new_resource.domain)
-    notifies :restart, "service[nginx]", :immediately
-    cookbook "certbot"
-  end
-
-  service "nginx" do
-    action :nothing
-  end
-
   cert_command = "#{base_command} #{domain_arg} #{webroot_arg} #{renew_arg} #{test_arg}"
 
   execute "letsencrypt-certonly" do
@@ -35,6 +19,11 @@ action :create do
       command "#{cert_command} && servige nginx restart"
       action :create
     end
+  end
+
+  certbot_activate_certificate new_resource.domain do
+    key_path certbot_privatekey_path_for(new_resource.domain)
+    cert_path certbot_cert_path_for(new_resource.domain)
   end
 end
 
