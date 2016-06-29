@@ -27,7 +27,7 @@ For example, for domain "www.example.com" it will create:
 * /etc/letsencrypt/current/www.example.com/key.pem
 
 
-##### Actions
+##### Actions
 <table>
     <tr>
         <th>Action</th>
@@ -73,7 +73,7 @@ For example, for domain "www.example.com" it will create:
 Generate a new valid ssl certifivate through the **certbot** service, and activate it
 
 
-##### Actions
+##### Actions
 <table>
     <tr>
         <th>Action</th>
