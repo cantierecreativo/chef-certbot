@@ -6,7 +6,7 @@ action :create do
     recursive true
   end
 
-  cert_command = "#{base_command} #{domain_arg} #{webroot_arg} #{renew_arg} #{test_arg}"
+  cert_command = "#{base_command} #{domain_arg} #{webroot_arg} #{renew_arg} #{test_arg} #{rsa_size_arg}"
 
   execute "letsencrypt-certonly" do
     command "#{cert_command} --email #{new_resource.email} --agree-tos"
@@ -36,6 +36,10 @@ def renew_arg
   when :renew_by_default then "--renew-by-default"
   when :keep_until_expiring then "--keep-until-expiring"
   end
+end
+
+def rsa_size_arg
+  "--rsa-key-size #{node['certbot']['rsa_key_size']}"
 end
 
 def webroot_arg

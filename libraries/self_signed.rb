@@ -15,7 +15,7 @@ def certbot_self_signed_key_path_for(domain)
 end
 
 def certbot_self_signed_pair
-  key = OpenSSL::PKey::RSA.new(node["certbot"]["self_signed_key_size"])
+  key = OpenSSL::PKey::RSA.new(node["certbot"]["rsa_key_size"])
   public_key = key.public_key
 
   subject = "/C=BE/O=Test/OU=Test/CN=Test"
@@ -34,7 +34,6 @@ def certbot_self_signed_pair
   cert.extensions = [
     ef.create_extension("basicConstraints","CA:TRUE", true),
     ef.create_extension("subjectKeyIdentifier", "hash"),
-    # ef.create_extension("keyUsage", "cRLSign,keyCertSign", true),
   ]
   cert.add_extension ef.create_extension("authorityKeyIdentifier",
                                          "keyid:always,issuer:always")
