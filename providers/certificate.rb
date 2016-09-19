@@ -51,7 +51,7 @@ def domain_arg
 end
 
 def base_command
-  "/usr/bin/letsencrypt certonly --non-interactive"
+  "#{node[:certbot][:executable]} certonly --non-interactive"
 end
 
 def webroot_dir
