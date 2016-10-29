@@ -16,7 +16,7 @@ action :create do
     cron "renew_#{new_resource.domain}" do
       time new_resource.frequency
       user 'root'
-      command "#{cert_command} && servige nginx restart"
+      command "#{cert_command} && service nginx restart"
       action :create
     end
   end
