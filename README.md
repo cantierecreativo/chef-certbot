@@ -36,7 +36,7 @@ server {
   listen 443;
   ssl on;
   ssl_certificate /etc/letsencrypt/live/www.example.com/cert.pem;
-  ssl_certificate_key /etc/letsencrypt/live/www.example.com/privatekey.pem;
+  ssl_certificate_key /etc/letsencrypt/live/www.example.com/key.pem;
 
   location ^~ /.well-known {
     alias /var/www/letsencrypt/www.example.com/.well-known;
@@ -296,6 +296,7 @@ In your recipe you simply need to call the provider!
 ```ruby
 certbot_certificate "mydomain_letsencrypt" do
   domain "www.example.com"
+  email "webmaster@example.com"
   action :create
 end
 ```
