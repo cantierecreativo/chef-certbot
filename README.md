@@ -281,6 +281,8 @@ certbot_self_signed_pair       #provide a new pair of key/certificate file strin
 
 certbot_current_directory(domain)    #provide the directory path for currents certificate for domain
 
+certbot_current_fullchain_path_for(domain) # the path of the current fullchain certificate path for the domain
+
 certbot_current_cert_path_for(domain) #the current certificate path for domain
 
 certbot_current_key_path_for(domain)  #the current key path for domain

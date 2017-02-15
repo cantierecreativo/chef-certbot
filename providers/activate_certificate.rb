@@ -8,7 +8,7 @@ action :install do
     action :create
   end
 
-  link cert_path do
+  link fullchain_path do
     to new_resource.cert_path
   end
 
@@ -31,4 +31,8 @@ end
 
 def cert_path
   certbot_current_cert_path_for(domain)
+end
+
+def fullchain_path
+  certbot_current_fullchain_path_for(domain)
 end
