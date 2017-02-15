@@ -66,6 +66,7 @@ template "/etc/nginx/sites-enabled/www.example.com.conf" do
 end
 
 certbot_certificate "www.example.com" do
+  email "webmaster@example.com"
   notifies :reload, "service[nginx]", :immediately                # when nginx is reloaded, it will point to the new valid certificates
 end
 ```
