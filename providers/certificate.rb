@@ -12,13 +12,12 @@ action :create do
     command "#{cert_command} --email #{new_resource.email} --agree-tos"
   end
 
-  if new_resource.install_cron
-    cron "renew_#{new_resource.domain}" do
-      time new_resource.frequency
-      user 'root'
-      command "#{cert_command} && service nginx restart"
-      action :create
-    end
+  cron "renew_#{new_resource.domain}" do
+    time new_resource.frequency
+    user 'root'
+    command "#{cert_command} && service nginx restart"
+    action :create
+    only_if { new_resource.install_cron }
   end
 
   certbot_activate_certificate new_resource.domain do
