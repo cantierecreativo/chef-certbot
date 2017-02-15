@@ -12,11 +12,14 @@ action :create do
     command "#{cert_command} --email #{new_resource.email} --agree-tos"
   end
 
-  cron "renew_#{new_resource.domain}" do
+  renew_command = "#{node[:certbot][:executable]} renew"
+
+  cron "renew letsencrypt certificates" do
     time new_resource.frequency
     user 'root'
-    command "#{cert_command} && service nginx restart"
+    command "#{renew_command} && service nginx restart"
     action :create
+
     only_if { new_resource.install_cron }
   end
 
