@@ -1,3 +1,7 @@
+def whyrun_supported?
+  true
+end
+
 action :install do
   directory current_dir do
     owner "root"

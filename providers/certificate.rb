@@ -1,3 +1,7 @@
+def whyrun_supported?
+  true
+end
+
 action :create do
   directory well_known_dir do
     owner "root"

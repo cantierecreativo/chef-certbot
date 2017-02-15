@@ -1,3 +1,7 @@
+def whyrun_supported?
+  true
+end
+
 action :create do
   directory certificate_dir do
     owner "root"
