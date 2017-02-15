@@ -58,7 +58,6 @@ In a recipe, you can write something like this:
 
 ```
 self_signed_certificate "www.example.com" do
-  domain "www.example.com"
 end
 
 template "/etc/nginx/sites-enabled/www.example.com.conf" do
@@ -67,7 +66,6 @@ template "/etc/nginx/sites-enabled/www.example.com.conf" do
 end
 
 certbot_certificate "www.example.com" do
-  domain "www.example.com"
   notifies :reload, "service[nginx]", :immediately                # when nginx is reloaded, it will point to the new valid certificates
 end
 ```
@@ -297,7 +295,6 @@ In your recipe you simply need to call the provider!
 
 ```ruby
 certbot_certificate "mydomain_letsencrypt" do
-  domain "www.example.com"
   email "webmaster@example.com"
   action :create
 end
