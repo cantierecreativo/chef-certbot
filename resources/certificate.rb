@@ -22,3 +22,7 @@ attribute :frequency,
 attribute :test,
           kind_of: [TrueClass, FalseClass],
           default: false
+
+attribute :allow_fail,
+          kind_of: [TrueClass, FalseClass],
+          default: false

@@ -12,8 +12,13 @@ action :create do
 
   cert_command = "#{base_command} #{domain_arg} #{webroot_arg} #{renew_arg} #{test_arg} #{rsa_size_arg}"
 
+  certificate_request = "#{cert_command} --email #{new_resource.email} --agree-tos"
+  if new_resource.allow_fail
+    certificate_request << " || true"
+  end
+
   execute "letsencrypt-certonly" do
-    command "#{cert_command} --email #{new_resource.email} --agree-tos"
+    command certificate_request
   end
 
   renew_command = "#{node[:certbot][:executable]} renew"
