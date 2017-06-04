@@ -26,7 +26,7 @@ action :create do
   cron "renew letsencrypt certificates" do
     time new_resource.frequency
     user 'root'
-    command "#{renew_command} && service nginx restart"
+    command "#{renew_command} --quiet --renew-hook \"/bin/systemctl reload nginx\""
     action :create
 
     only_if { new_resource.install_cron }
