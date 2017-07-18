@@ -13,7 +13,7 @@ action :install do
   end
 
   link fullchain_path do
-    to new_resource.cert_path
+    to new_resource.fullchain_path
   end
 
   link key_path do
