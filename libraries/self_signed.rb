@@ -1,3 +1,5 @@
+require "openssl"
+
 def certbot_self_signed_directory(domain)
   ::File.join(
     node["certbot"]["working_dir"],
