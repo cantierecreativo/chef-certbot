@@ -19,6 +19,7 @@ action :create do
 
   execute "letsencrypt-certonly" do
     command certificate_request
+    not_if { ::File.exist?(certbot_fullchain_path_for(new_resource.domain)) }
   end
 
   renew_command = "#{node[:certbot][:executable]} renew"
