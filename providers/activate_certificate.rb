@@ -33,10 +33,6 @@ def key_path
   certbot_current_key_path_for(domain)
 end
 
-def cert_path
-  certbot_current_cert_path_for(domain)
-end
-
 def fullchain_path
   certbot_current_fullchain_path_for(domain)
 end

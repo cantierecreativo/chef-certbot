@@ -34,7 +34,7 @@ action :create do
     end
 
     certbot_activate_certificate new_resource.domain do
-      cert_path self_signed_cert_path
+      fullchain_path self_signed_cert_path
       key_path self_signed_key_path
     end
   end

@@ -235,7 +235,7 @@ For example, for domain `www.example.com` it will create:
         <td>true</td>
     </tr>
     <tr>
-        <td>cert_path</td>
+        <td>fullchain_path</td>
         <td>File system path of the certificate file you want to use</td>
         <td>nil</td>
         <td>true</td>
