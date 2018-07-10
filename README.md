@@ -57,7 +57,7 @@ a self-signed certificate and install it in the
 In a recipe, you can write something like this:
 
 ```
-self_signed_certificate "www.example.com" do
+certbot_self_signed_certificate "www.example.com" do
 end
 
 template "/etc/nginx/sites-enabled/www.example.com.conf" do
